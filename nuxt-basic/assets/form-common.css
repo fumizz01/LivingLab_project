@@ -1,0 +1,81 @@
+/* ฟอร์มและ input ที่ใช้ร่วมกัน */
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+.form-label {
+  font-size: 15px;
+  color: #222;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  margin-bottom: 2px;
+}
+.required {
+  color: #e53935;
+  font-size: 15px;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  margin-right: 2px;
+}
+.form-input {
+  width: 100%;
+  height: 44px;
+  background: #fff;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  border: none;
+  font-size: 15px;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 400;
+  letter-spacing: 1.4px;
+  padding: 0 18px;
+  color: #222;
+  margin-bottom: 2px;
+  box-sizing: border-box;
+}
+.form-input::placeholder {
+  color: #aaa;
+  font-size: 15px;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 400;
+  letter-spacing: 1.4px;
+}
+.input-error {
+  box-shadow: 0px 4px 30px rgba(229, 57, 53, 0.25);
+}
+.error-message {
+  color: #e53935;
+  font-size: 13px;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 400;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 4px;
+}
+
+/* ปุ่มกลางสำหรับ BaseButton ใช้กับทั้ง login/register */
+.base-btn, .register-btn, .login-btn {
+  margin: 24px auto 0 auto;
+  width: 180px;
+  height: 44px;
+  border-radius: 22px;
+  border: none;
+  background: #e0e0e0;
+  color: #222;
+  font-size: 16px;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: block;
+}
+.base-btn:hover, .register-btn:hover, .login-btn:hover {
+  background: #d1d1d1;
+}
