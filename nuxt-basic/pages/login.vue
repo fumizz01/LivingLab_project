@@ -2,6 +2,9 @@
   <v-app>
     <v-main>
       <div class="login-bg">
+        <v-btn icon class="close-btn" @click="$emit('close')">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
         <!-- Language switch (Nuxt i18n) -->
         <div class="lang-switch">
           <a class="lang-btn" @click.prevent="switchLang('th')">TH</a>
@@ -141,8 +144,14 @@ function onSubmit() {
     // TODO: login logic
   }
 }
-function goRegister() { /* router.push('/register') */ }
-function goForgotPassword() { /* router.push('/forgetpassword') */ }
+function goRegister() {
+  router.push('/register') // นำไปยังหน้า register
+}
+
+function goForgotPassword() {
+  router.push('/forgetpassword') // นำไปยังหน้า forget password
+}
+
 function loginWithKMUTT() { /* ... */ }
 
 // ---- สลับภาษาแบบ “เปลี่ยน URL” ให้ i18n จัดการทุกอย่าง ----
@@ -163,13 +172,19 @@ function blockThai(e: KeyboardEvent) { if (/[ก-๙]/.test(e.key)) e.preventDef
 </script>
 
 <style scoped>
+.close-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+}
 /* ---------- Layout ---------- */
 .login-bg {
   min-height: 100vh; background: #0a0a1a;
   display: flex; align-items: center; justify-content: center; width: 100vw;
 }
 .login-box {
-  width: 480px; max-width: 95vw; border-radius: 24px; background: #fff;
+  width: 720px; max-width: 95vw; border-radius: 24px; background: #fff;
   box-shadow: 0 8px 40px rgba(0,0,0,0.18);
   padding: 48px 32px 32px; display: flex; flex-direction: column; align-items: center;
 }

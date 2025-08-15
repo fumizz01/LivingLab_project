@@ -1,11 +1,22 @@
 <template>
-  <div class="password-strength-wrapper" v-if="password">
-    <div :class="['strength-bar', strengthClass]">{{ strengthLabel }}</div>
+  <div v-if="password" class="password-strength-wrapper">
+    <!-- Strength label with background -->
+    <div :class="['strength-label', strengthClass]">{{ strengthLabel }}</div>
+
+    <!-- Password criteria -->
     <ul class="password-criteria">
-      <li :class="{'criteria-met': password.length >= 8 && password.length <= 20}">8 - 20 ตัวอักษร</li>
-      <li :class="{'criteria-met': /[A-Z]/.test(password)}">ต้องมีตัวอักษรพิมพ์ใหญ่อย่างน้อย 1 ตัว</li>
-      <li :class="{'criteria-met': /[a-z]/.test(password)}">ต้องมีตัวอักษรพิมพ์เล็กอย่างน้อย 1 ตัว</li>
-      <li :class="{'criteria-met': /[0-9]/.test(password)}">ต้องมีตัวเลขอย่างน้อย 1 ตัว</li>
+      <li
+        v-for="(criteria, index) in criteriaList"
+        :key="index"
+        :class="{ 'criteria-met': criteria.met }"
+      >
+        <span class="criteria-icon">
+          <v-icon :color="criteria.met ? 'success' : 'grey'">
+            {{ criteria.met ? 'mdi-check-circle' : 'mdi-circle-outline' }}
+          </v-icon>
+        </span>
+        <span class="criteria-text">{{ criteria.label }}</span>
+      </li>
     </ul>
   </div>
 </template>
@@ -34,74 +45,93 @@ export default {
       if (this.strength >= 1) return 'WEAK';
       return '';
     },
+    strengthColor() {
+      if (this.strength === 4) return 'success';
+      if (this.strength === 3) return 'warning';
+      if (this.strength >= 1) return 'error';
+      return 'grey';
+    },
     strengthClass() {
-      if (this.strength === 4) return 'strong';
-      if (this.strength === 3) return 'medium';
-      if (this.strength >= 1) return 'weak';
-      return '';
+      if (this.strength === 4) return 'strength-strong';
+      if (this.strength === 3) return 'strength-medium';
+      if (this.strength >= 1) return 'strength-weak';
+      return 'strength-none';
+    },
+    criteriaList() {
+      return [
+        {
+          label: '8 - 20 ตัวอักษร',
+          met: this.password.length >= 8 && this.password.length <= 20
+        },
+        {
+          label: 'ต้องมีตัวอักษรพิมพ์ใหญ่อย่างน้อย 1 ตัว',
+          met: /[A-Z]/.test(this.password)
+        },
+        {
+          label: 'ต้องมีตัวอักษรพิมพ์เล็กอย่างน้อย 1 ตัว',
+          met: /[a-z]/.test(this.password)
+        },
+        {
+          label: 'ต้องมีตัวเลขอย่างน้อย 1 ตัว',
+          met: /[0-9]/.test(this.password)
+        }
+      ];
     }
   }
-}
+};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&family=Work+Sans:wght@600&display=swap');
-
 .password-strength-wrapper {
   width: 100%;
-  margin-bottom: 8px;
-  /* margin-top: 8px; */
+  margin-bottom: 16px;
 }
-.strength-bar {
-  width: 120px;
-  padding: 5px 0;
-  border-radius: 16px;
-  text-align: center;
-  font-size: 13px;
+
+.strength-label {
+  font-size: 14px;
   font-weight: bold;
+  text-align: center;
+  margin-top: 8px;
   margin-bottom: 8px;
-  color: #fff;
-  font-family: Noto Sans Thai;
-  letter-spacing: 1.4px;
-  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 16px;
+  /* display: inline-block; */
+  color: #fff; /* Default text color */
 }
-.strength-bar.strong {
-  background: #22c522;
+.strength-strong {
+  background-color: #43d477; /* สีเขียวสำหรับ STRONG */
 }
-.strength-bar.medium {
-  background: #fbc02d;
-  color: #222;
+.strength-medium {
+  background-color: #fbc02d; /* สีเหลืองสำหรับ MEDIUM */
 }
-.strength-bar.weak {
-  background: #e53935;
+.strength-weak {
+  background-color: #e53935; /* สีแดงสำหรับ WEAK */
+}
+.strength-none {
+  background-color: #bdbdbd; /* สีเทาสำหรับไม่มีรหัสผ่าน */
 }
 .password-criteria {
   list-style: none;
   padding: 0;
-  margin: 0 0 0 4px;
-  font-size: 13px;
-  color: #888;
+  margin: 0;
 }
 .password-criteria li {
-  margin-bottom: 2px;
-  position: relative;
-  padding-left: 18px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
 }
-.password-criteria li:before {
-  content: '\2022';
-  color: #bdbdbd;
-  position: absolute;
-  left: 0;
-  font-size: 16px;
-  top: 0;
+.criteria-icon {
+  margin-right: 8px;
 }
-.password-criteria .criteria-met {
+.criteria-text {
+  font-size: 14px;
+  color: #333;
+}
+.criteria-met .criteria-text {
+  color: #43d477; /* สีเขียวเมื่อเงื่อนไขผ่าน */
+  font-weight: bold;
+}
+.criteria-met v-icon {
   color: #43d477;
-  font-weight: 700;
-}
-.password-criteria .criteria-met:before {
-  content: '\2713';
-  color: #43d477;
-  font-size: 15px;
 }
 </style>
