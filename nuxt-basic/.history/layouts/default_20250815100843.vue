@@ -54,12 +54,12 @@
                 class="search-input"
                 type="text"
                 v-model="searchText"
-                :placeholder="t('pop-search.search')"
+                placeholder="ค้นหากิจกรรม..."
                 style="width: 100%"
                 @keyup.enter="handleSearch"
               />
               <v-btn text :to="$localePath('explore')" @click="handleSearch"
-                >{{ t("pop-search.search-btn") }}</v-btn
+                >ค้นหา</v-btn
               >
             </div>
           </v-card-text>
@@ -165,8 +165,6 @@
     <v-main>
       <slot />
     </v-main>
-
-  
   </v-app>
 </template>
 
@@ -183,15 +181,7 @@ const lang = ref("TH");
 const { t, locale } = useI18n();
 const route = useRoute();
 
-function handleSearch() {
-  searchDialog.value = false;
-  const path =
-    locale.value === "en"
-      ? `/en/explore?search=${encodeURIComponent(searchText.value)}`
-      : `/explore?search=${encodeURIComponent(searchText.value)}`;
-  router.push(path);
-  searchText.value = ""; // Clear the input field after search
-}
+import { handleSearch } from '@/utils/handleSearch';
 
 function switchLang(code: "th" | "en") {
   const full = route.fullPath;
@@ -318,7 +308,6 @@ function switchLang(code: "th" | "en") {
   border-radius: 24px !important  ;
   color: #ffffff !important;
 }
-
 
 @media (max-width: 1028px) {
   .nav-left,

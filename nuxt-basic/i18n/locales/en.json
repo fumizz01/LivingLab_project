@@ -17,6 +17,26 @@
       "usernameRequired": "Please enter your username",
       "passwordRequired": "Please enter your password"
     }
+  },
+
+  "nav": {
+    "home": "Home",
+    "qrScan": "QR Scan",
+    "explore": "Explore",
+    "login": "Login",
+    "search": "Search activities..."
+  },
+
+  "pop-search":{
+    "search": "Search activities...",
+    "search-btn": "Search"
+  },
+
+  "hero": {
+    "title": "Unlock Learning Anywhere",
+    "subtitle": "Learning Activities & Spots",
+    "exploreButton": "Start"
   }
+
 }
 
