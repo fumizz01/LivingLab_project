@@ -1,10 +1,10 @@
 <template>
   <div class="image-container">
     <div class="head-dialog">
-      <h1>เรียนรู้นอกกรอบ เริ่มต้นที่นี่</h1>
-      <p>กิจกรรมและสถานที่สำหรับการเรียนรู้</p>
-      <button class="explore-button" @click="router.push('/explore')">
-      <span>เริ่มเลย</span>
+      <h1>{{ t('hero.title') }}</h1>
+      <p>{{ t('hero.subtitle') }}</p>
+      <button class="explore-button" @click="handleSearch()">
+      <span>{{ t('hero.exploreButton') }}</span>
     </button>
     </div>
 
@@ -17,8 +17,26 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from 'vue-i18n'
+
+
+const searchDialog = ref(false);
+const searchText = ref("");
 const router = useRouter();
+const { t, locale} = useI18n();
+
+
+function handleSearch() {
+  searchDialog.value = false;
+  const path =
+  locale.value === 'en'
+    ? `/en/explore?search=${encodeURIComponent(searchText.value)}`
+    : `/explore?search=${encodeURIComponent(searchText.value)}`;
+  router.push(path);
+  searchText.value = ""; // Clear the input field after search
+}
 </script>
 
 <style scoped>

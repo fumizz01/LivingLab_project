@@ -141,7 +141,7 @@
           @keyup.enter="handleSearch"
         />
       </div>
-      <v-btn text to="/#" class="d-none d-sm-flex">{{ t("nav.login-nav") }}</v-btn>
+      <v-btn text to="/#" class="d-none d-sm-flex">{{ t("nav.login") }}</v-btn>
       <v-btn-toggle
         class="lang-toggle d-none d-sm-flex"
         mandatory

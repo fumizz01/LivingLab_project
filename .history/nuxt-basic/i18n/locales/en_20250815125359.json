@@ -18,6 +18,8 @@
       "passwordRequired": "Please enter your password"
     }
   },
+<<<<<<< HEAD
+=======
 
   "nav": {
     "home": "Home",
@@ -36,8 +38,10 @@
     "title": "Unlock Learning Anywhere",
     "subtitle": "Learning Activities & Spots",
     "exploreButton": "Start"
-  },
+  }
 
+}
+>>>>>>> homepage
 
   "register": {
     "title": "Register",

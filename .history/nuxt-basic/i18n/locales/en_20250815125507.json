@@ -19,26 +19,6 @@
     }
   },
 
-  "nav": {
-    "home": "Home",
-    "qrScan": "QR Scan",
-    "explore": "Explore",
-    "login-nav": "Login",
-    "search": "Search activities..."
-  },
-
-  "pop-search":{
-    "search": "Search activities...",
-    "search-btn": "Search"
-  },
-
-  "hero": {
-    "title": "Unlock Learning Anywhere",
-    "subtitle": "Learning Activities & Spots",
-    "exploreButton": "Start"
-  },
-
-
   "register": {
     "title": "Register",
     "firstName": "First Name",
