@@ -82,9 +82,9 @@
           <v-list-item :to="$localePath('explore')">{{
             t("nav.explore")
           }}</v-list-item>
-          <v-list-item @click="loginDialog = true">
-            {{ t("nav.login-nav") }}
-          </v-list-item>
+          <v-list-item :to="$localePath('login')">{{
+            t("nav.login-nav")
+          }}</v-list-item>
           <v-list-item>
             <v-btn-toggle
               class="lang-toggle"
@@ -166,10 +166,18 @@
       </v-btn-toggle>
     </v-app-bar>
 
+
     <!-- Login popup -->
     <v-dialog v-model="loginDialog" fullscreen persistent>
       <v-card>
-        <login @close="loginDialog = false" />
+      
+          <v-btn icon @click="loginDialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        
+        <v-card-text>
+          <login />
+        </v-card-text>
       </v-card>
     </v-dialog>
 
@@ -183,6 +191,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
+
 
 const searchDialog = ref(false);
 const searchText = ref("");

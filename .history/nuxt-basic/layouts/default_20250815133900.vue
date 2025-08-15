@@ -83,8 +83,8 @@
             t("nav.explore")
           }}</v-list-item>
           <v-list-item @click="loginDialog = true">
-            {{ t("nav.login-nav") }}
-          </v-list-item>
+  {{ t("nav.login-nav") }}
+</v-list-item>
           <v-list-item>
             <v-btn-toggle
               class="lang-toggle"

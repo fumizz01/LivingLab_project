@@ -58,9 +58,9 @@
                 style="width: 100%"
                 @keyup.enter="handleSearch"
               />
-              <v-btn text :to="$localePath('explore')" @click="handleSearch">{{
-                t("pop-search.search-btn")
-              }}</v-btn>
+              <v-btn text :to="$localePath('explore')" @click="handleSearch"
+                >{{ t("pop-search.search-btn") }}</v-btn
+              >
             </div>
           </v-card-text>
         </v-card>
@@ -82,9 +82,7 @@
           <v-list-item :to="$localePath('explore')">{{
             t("nav.explore")
           }}</v-list-item>
-          <v-list-item @click="loginDialog = true">
-            {{ t("nav.login-nav") }}
-          </v-list-item>
+          <v-list-item :to="$localePath('login')">{{ t("nav.login-nav") }}</v-list-item>
           <v-list-item>
             <v-btn-toggle
               class="lang-toggle"
@@ -143,9 +141,7 @@
           @keyup.enter="handleSearch"
         />
       </div>
-      <v-btn text class="d-none d-sm-flex" @click="loginDialog = true">{{
-        t("nav.login-nav")
-      }}</v-btn>
+      <v-btn text class="d-none d-sm-flex" @click="loginDialog = true">{{ t("nav.login-nav") }}</v-btn>
       <v-btn-toggle
         class="lang-toggle d-none d-sm-flex"
         mandatory
@@ -166,16 +162,27 @@
       </v-btn-toggle>
     </v-app-bar>
 
-    <!-- Login popup -->
     <v-dialog v-model="loginDialog" fullscreen persistent>
       <v-card>
-        <login @close="loginDialog = false" />
+        <v-toolbar dark color="primary">
+          <v-toolbar-title>{{ t("nav.login-nav") }}</v-toolbar-title>
+          <v-spacer />
+          <v-btn icon @click="loginDialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text>
+          <!-- Replace below with your actual login component or form -->
+          <login />
+        </v-card-text>
       </v-card>
     </v-dialog>
 
     <v-main>
       <slot />
     </v-main>
+
+  
   </v-app>
 </template>
 
@@ -196,7 +203,7 @@ const route = useRoute();
 function handleSearch() {
   searchDialog.value = false;
   const path =
-    locale.value === "th"
+    locale.value === "en"
       ? `/en/explore?search=${encodeURIComponent(searchText.value)}`
       : `/explore?search=${encodeURIComponent(searchText.value)}`;
   router.push(path);
@@ -328,6 +335,7 @@ function switchLang(code: "th" | "en") {
   border-radius: 24px !important  ;
   color: #ffffff !important;
 }
+
 
 @media (max-width: 1028px) {
   .nav-left,
