@@ -1,0 +1,18 @@
+<template>
+  <div class="card-container">
+    <img src="https://via.placeholder.com/370x480" alt="image">\
+  </div>
+</template>
+
+<script setup></script>
+
+<style scoped>
+.card-container {
+  background-color: grey;
+  border-radius: 31px;
+  padding: 16px;
+  margin-bottom: 16px;
+  width: 370px;
+  height: 480px;
+}
+</style>

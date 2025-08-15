@@ -1,0 +1,116 @@
+<template>
+  <div class="image-container">
+    <div class="head-dialog">
+      <h1>{{ t('hero.ti') }}</h1>
+      <p>กิจกรรมและสถานที่สำหรับการเรียนรู้</p>
+      <button class="explore-button" @click="router.push('/explore')">
+      <span>เริ่มเลย</span>
+    </button>
+    </div>
+
+    <div class="intro-img">
+      <img src="/public/intro_img.png" alt="intro image" class="intro-img"/>
+    </div>
+
+   
+  </div>
+</template>
+
+<script setup>
+import { useRouter } from "vue-router";
+const router = useRouter();
+</script>
+
+<style scoped>
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 500px;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #000000 100%, #888888 100%);
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.head-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 40px 60px 12px 0;
+  color: white;
+  font-size: 1.6rem;
+}
+
+.intro-img {
+  order: 1;
+  align-self: center;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin-bottom: 0;
+}
+
+.intro-img img {
+  width: 500px;      /* Set your desired width */
+  height: 500px;      /* Maintain aspect ratio */
+  display: flex;   /* Remove inline spacing */
+}
+
+.explore-button {
+  background: linear-gradient(90deg, #0077FF 0%, #00C6FF 100%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 45px;
+  box-shadow: 0 4px 16px rgba(0, 119, 255, 0.15);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  order: 2;
+}
+
+.explore-button:hover {
+  background: linear-gradient(90deg, #00C6FF 0%, #0077FF 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(0, 119, 255, 0.25);
+}
+
+@media (max-width: 1028px) {
+  .image-container {
+    flex-direction: column;
+    padding: 24px 8px;
+    min-height: 0;
+  }
+  .head-dialog {
+    margin: 24px 0 24px 0;
+    text-align: center;
+    align-items: center;
+  }
+
+  .explore-button {
+    order: 2; /* Move button after image and text */
+    margin-top: 16px;
+  }
+
+ .intro-img {
+    margin-bottom: 0;
+    width: 300px;
+    height: 300px;
+    max-width: 90vw;
+  }
+  .intro-img img {
+  max-width: 90vh;
+  width: 300px;      
+  height: 300px;      
+  display: flex;   
+}
+}
+
+</style>

@@ -1,0 +1,30 @@
+{
+  "login": {
+    "title": "เข้าสู่ระบบ",
+    "username": "ชื่อผู้ใช้",
+    "usernamePlaceholder": "ชื่อผู้ใช้",
+    "password": "รหัสผ่าน",
+    "passwordPlaceholder": "รหัสผ่าน",
+    "forgotPassword": "ลืมรหัสผ่าน",
+    "loginButton": "เข้าสู่ระบบ",
+    "loginWithOther": "เข้าสู่ระบบด้วยบัญชีอื่น",
+    "loginWithKMUTT": "เข้าสู่ระบบด้วยบัญชี KMUTT",
+    "noAccount": "ยังไม่มีบัญชีผู้ใช้?",
+    "register": "ลงทะเบียน",
+    "showPasswordAlt": "แสดงรหัสผ่าน",
+    "hidePasswordAlt": "ซ่อนรหัสผ่าน",
+    "errors": {
+      "usernameRequired": "กรุณากรอกชื่อผู้ใช้",
+      "passwordRequired": "กรุณากรอกรหัสผ่าน"
+    }
+  },
+
+  "nav": {
+    "home": "หน้าแรก",
+    "qrScan": "สแกน QR",
+    "explore": "สำรวจ",
+    "login": "ลงชื่อเข้าใช้"
+    "search": "Search..."
+  }
+}
+

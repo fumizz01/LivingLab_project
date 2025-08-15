@@ -1,0 +1,309 @@
+<template>
+  <v-app>
+      <!-- Menu -->
+      <v-app-bar color="black" dark app>
+        <div style="display: flex; align-items: center">
+          <v-toolbar-title class="pl-5 pr-2 mr-2 font-weight-bold">
+            <NuxtLink class="logo-link" to="/"> Living Lab </NuxtLink>
+          </v-toolbar-title>
+          <div
+            class="nav-left d-none d-sm-flex"
+            style="display: flex; align-items: center"
+          >
+            <v-btn class="nav-btn" variant="text" to="/">{{ t('login.title') }}</v-btn>
+            <v-btn class="nav-btn" variant="text" to="/qrscan">สแกน QR</v-btn>
+            <v-btn class="nav-btn" variant="text" to="/explore">สำรวจ</v-btn>
+          </div>
+        </div>
+
+        <!-- Spacer between logo and icon (responsive) -->
+        <v-spacer style="flex: 100" />
+
+        <!-- Search icon for mobile -->
+        <button
+          class="search-icon d-sm-none"
+          @click="searchDialog = true"
+          style="
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-right: 8px;
+          "
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/11741/11741045.png"
+            alt="search"
+            width="24"
+            height="24"
+            style="display: block"
+          />
+        </button>
+        <v-dialog v-model="searchDialog" width="400">
+          <v-card class="custom-search-card">
+            <v-card-text>
+              <div class="dialog-search-bar" style="margin: 8px 0">
+                <input
+                  class="search-input"
+                  type="text"
+                  v-model="searchText"
+                  placeholder="ค้นหากิจกรรม..."
+                  style="width: 100%"
+                  @keyup.enter="handleSearch"
+                />
+                <v-btn text to="/explore" @click="handleSearch">ค้นหา</v-btn>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+
+        <!-- Hamburger icon for mobile -->
+        <v-menu class="d-sm-none" offset-y location="top end">
+          <template #activator="{ props }">
+            <v-app-bar-nav-icon class="d-sm-none" v-bind="props" />
+          </template>
+
+          <v-list style="width: 100%">
+            <v-list-item to="/">หน้าแรก</v-list-item>
+            <v-list-item to="/qrscan">สแกน QR</v-list-item>
+            <v-list-item to="/explore">สำรวจ</v-list-item>
+            <v-list-item to="/#">ลงชื่อเข้าใช้</v-list-item>
+            <v-list-item>
+              <v-btn-toggle
+                class="lang-toggle"
+                mandatory
+                v-model="lang"
+                style="margin: 0 auto; display: flex; justify-content: center"
+              >
+                <v-btn value="TH" class="lang-btn">TH</v-btn>
+                <span
+                  style="
+                    color: white;
+                    font-weight: bold;
+                    display: flex;
+                    align-items: center;
+                    margin: 0 8px;
+                  "
+                  >|</span
+                >
+                <v-btn value="EN" class="lang-btn">EN</v-btn>
+              </v-btn-toggle>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-spacer />
+
+        <!-- Search bar and buttons -->
+        <div class="custom-search-bar d-none d-sm-flex">
+          <button
+            class="search-icon"
+            @click="handleSearch"
+            :disabled="!searchText"
+            style="
+              background: none;
+              border: none;
+              cursor: pointer;
+              margin-right: 8px;
+            "
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/54/54481.png"
+              alt="search"
+              width="24"
+              height="24"
+              style="display: block"
+            />
+          </button>
+          <input
+            class="search-input"
+            type="text"
+            v-model="searchText"
+            placeholder="ค้นหากิจกรรม..."
+            @keyup.enter="handleSearch"
+          />
+        </div>
+        <v-btn text to="/#" class="d-none d-sm-flex">ลงชื่อเข้าใช้</v-btn>
+        <v-btn-toggle
+          class="lang-toggle d-none d-sm-flex"
+          mandatory
+          v-model="lang"
+          style="margin-left: 16px"
+        >
+          <v-btn value="TH" class="lang-btn">TH</v-btn>
+          <span
+            style="
+              color: white;
+              font-weight: bold;
+              display: flex;
+              align-items: center;
+            "
+            >|</span
+          >
+          <v-btn value="EN" class="lang-btn">EN</v-btn>
+        </v-btn-toggle>
+      </v-app-bar>
+
+      <v-main>
+        <slot />
+      </v-main>
+  </v-app>
+</template>
+
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const searchDialog = ref(false);
+const searchText = ref("");
+const router = useRouter();
+const lang = ref("TH");
+
+function handleSearch() {
+  searchDialog.value = false;
+  router.push("/explore");
+  searchText.value = ""; // Clear the input field after search
+}
+</script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap");
+
+* {
+  font-family: "Noto Sans Thai", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.v-main {
+  padding-top: 64px; /* typical app-bar height */
+}
+
+.logo-link {
+  font-size: 24px;
+  color: #ffffff; /* Change to your desired color */
+  text-decoration: none;
+  margin: 0 20px 0 20px;
+}
+
+.nav-left .nav-btn {
+  margin-right: 20px;
+}
+
+.nav-left .nav-btn:last-child {
+  margin-right: 0;
+}
+
+.dialog-search-bar {
+  display: flex;
+  align-items: center;
+  background: #ededed; /* Inner gray */
+  border-radius: 24px;
+  padding: 4px 8px;
+}
+
+.v-btn--size-default {
+  --v-btn-size: 0.875rem;
+  --v-btn-height: 38px;
+  font-size: var(--v-btn-size);
+  min-width: 64px;
+  padding: 0 16px;
+  border-radius: 24px;
+}
+
+.custom-search-bar {
+  display: flex;
+  align-items: center;
+  background: #a5a2a2; /* Outer gray */
+  border-radius: 32px;
+  padding: 4px 12px 4px 8px;
+  height: 48px;
+  min-width: 200px;
+  max-width: 270px;
+}
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: #ededed;
+  border-radius: 24px;
+  padding: 5px 16px;
+  font-size: 1rem;
+  width: 100%; /* Make input fill parent */
+  color: #444;
+  box-sizing: border-box; /* Prevent overflow */
+}
+
+.custom-search-card {
+  border-radius: 24px !important;
+  position: absolute;
+  top: -42vh; /* Use a positive value for consistent positioning */
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  width: 100%; /* Responsive width */
+  max-width: 768px; /* Limit width on large screens */
+  margin: 0 auto;
+  z-index: 9999;
+  height: auto;
+  max-height: 80vh;
+}
+
+.v-card-text {
+  padding: 1px 8px !important;
+}
+
+.lang-toggle {
+  background: #00000000;
+  border-radius: 1px;
+  padding: 1px 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.lang-btn {
+  color: #ffffff !important;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 24px !important;
+  min-width: 48px;
+  transition: background 0.2s;
+  background: rgb(0, 0, 0);
+}
+
+.lang-btn.v-btn--active {
+  background: #0077ff !important;
+  border-radius: 24px !important  ;
+  color: #ffffff !important;
+}
+
+@media (max-width: 1028px) {
+  .nav-left,
+  .custom-search-bar,
+  .d-sm-flex {
+    display: none !important;
+  }
+  .d-sm-none {
+    display: block !important;
+  }
+  .v-list-item--density-default.v-list-item--one-line {
+    min-height: 48px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 1028px;
+    text-align: center;
+  }
+  .v-menu > .v-overlay__content > .v-card,
+  .v-menu > .v-overlay__content > .v-sheet,
+  .v-menu > .v-overlay__content > .v-list {
+    background: rgb(0, 0, 0);
+    border-radius: inherit;
+    overflow: auto;
+    height: 100%;
+    color: #ffffff;
+  }
+}
+</style>
