@@ -200,22 +200,9 @@ function handleTouchMove(e) {
   const walk = startX - x
   cardRow.value.scrollLeft = initialScrollLeft + walk
 }
+
 function handleTouchEnd() {
   isDragging = false
-}
-
-// Functions for button click
-const scrollAmount = 400 // Adjust as needed for card width
-
-function scrollLeft() {
-  if (cardRow.value) {
-    cardRow.value.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
-  }
-}
-function scrollRight() {
-  if (cardRow.value) {
-    cardRow.value.scrollBy({ left: scrollAmount, behavior: 'smooth' })
-  }
 }
 
 onMounted(() => {
@@ -233,150 +220,8 @@ onBeforeUnmount(() => {
     cardRow.value.removeEventListener('touchend', handleTouchEnd)
   }
 })
-</script>
 
-<style scoped>
-.card-row-wrapper {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  position: relative;
-  justify-content: center;
-}
+const scrollAmount = 400 // Adjust to match card width
 
-.arrow-btn {
-  border: none;
-  border-radius: 50%;
-  padding: 6px;
-  cursor: pointer;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-
-.arrow-btn.left {
-  margin-right: 8px;
-}
-
-.arrow-btn.right {
-  margin-left: 8px;
-}
-
-.card-row {
-  display: flex;
-  gap: 24px; 
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 8px 0;
-  width: auto; 
-  max-width: 100vw;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.card-container {
-  position: relative;
-  background: none;
-  border: none;
-  border-radius: 31px;
-  padding: 0;
-  margin-bottom: 16px;
-  min-width: 400px;
-  max-width: 400px;
-  height: 450px;
-  overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-}
-
-.card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.card-info-overlay {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 180px;
-  opacity: 90%;
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.85) 100%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  color: #f8f8f8;
-  padding: 16px 16px 12px 16px;
-  border-bottom-left-radius: 31px;
-  border-bottom-right-radius: 31px;
-  border-top-left-radius: 31px;
-  border-top-right-radius: 31px;
-}
-
-.card-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin: 5px 0 4px 0;
-}
-
-.card-desc {
-  font-size: 0.95rem;
-  margin: 0 0 12px 0;
-  opacity: 0.85;
-  line-height: 1.3;
-}
-
-.card-meta {
-  display: flex;
-  padding-top: 38px;
-  align-items: center;
-  font-size: 0.95rem;
-  gap: 16px;
-  justify-content: space-between;
-}
-
-.card-location {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  opacity: 0.85;
-}
-
-.card-views {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  opacity: 0.85;
-  margin-left: auto;
-}
-
-@media (max-width: 1028px) {
-  .card-row {
-    overflow-x: auto;      /* Allow horizontal scroll/swipe */
-    justify-content: center;
-  }
-  .card-container {
-    width: 280px;
-    max-width: 280px;
-    min-width: unset;
-    height: 315px; /* 8:9 aspect ratio: 280 * 9 / 8 = 315 */
-    margin: 0 auto;
-    flex: 0 0 280px;
-  }
-
-  .card-info-overlay{
-    height: 170px;
-  }
-  .card-meta{
-    padding-top:20px
-  }
-  .arrow-btn img {
-    width: 20px;
-    height: 20px;
-  }
-}
-</style>
+function scrollLeft() {
+  if

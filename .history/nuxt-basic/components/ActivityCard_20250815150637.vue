@@ -367,10 +367,6 @@ onBeforeUnmount(() => {
     margin: 0 auto;
     flex: 0 0 280px;
   }
-
-  .card-info-overlay{
-    height: 170px;
-  }
   .card-meta{
     padding-top:20px
   }

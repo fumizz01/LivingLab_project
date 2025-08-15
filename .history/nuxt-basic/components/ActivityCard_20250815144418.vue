@@ -182,57 +182,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref } from 'vue'
 const cardRow = ref(null)
 
-let startX = 0
-let initialScrollLeft = 0
-let isDragging = false
-
-function handleTouchStart(e) {
-  isDragging = true
-  startX = e.touches[0].pageX
-  initialScrollLeft = cardRow.value.scrollLeft
-}
-function handleTouchMove(e) {
-  if (!isDragging) return
-  const x = e.touches[0].pageX
-  const walk = startX - x
-  cardRow.value.scrollLeft = initialScrollLeft + walk
-}
-function handleTouchEnd() {
-  isDragging = false
-}
-
-// Functions for button click
-const scrollAmount = 400 // Adjust as needed for card width
-
 function scrollLeft() {
-  if (cardRow.value) {
-    cardRow.value.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
-  }
+  if (cardRow.value) cardRow.value.scrollBy({ left: -400, behavior: 'smooth' })
 }
 function scrollRight() {
-  if (cardRow.value) {
-    cardRow.value.scrollBy({ left: scrollAmount, behavior: 'smooth' })
-  }
+  if (cardRow.value) cardRow.value.scrollBy({ left: 400, behavior: 'smooth' })
 }
-
-onMounted(() => {
-  if (cardRow.value) {
-    cardRow.value.addEventListener('touchstart', handleTouchStart)
-    cardRow.value.addEventListener('touchmove', handleTouchMove)
-    cardRow.value.addEventListener('touchend', handleTouchEnd)
-  }
-})
-
-onBeforeUnmount(() => {
-  if (cardRow.value) {
-    cardRow.value.removeEventListener('touchstart', handleTouchStart)
-    cardRow.value.removeEventListener('touchmove', handleTouchMove)
-    cardRow.value.removeEventListener('touchend', handleTouchEnd)
-  }
-})
 </script>
 
 <style scoped>
@@ -356,8 +314,8 @@ onBeforeUnmount(() => {
 
 @media (max-width: 1028px) {
   .card-row {
-    overflow-x: auto;      /* Allow horizontal scroll/swipe */
-    justify-content: center;
+    overflow-x: hidden;      /* Hide horizontal scroll */
+    justify-content: center; /* Center the card */
   }
   .card-container {
     width: 280px;
@@ -367,10 +325,6 @@ onBeforeUnmount(() => {
     margin: 0 auto;
     flex: 0 0 280px;
   }
-
-  .card-info-overlay{
-    height: 170px;
-  }
   .card-meta{
     padding-top:20px
   }
@@ -378,5 +332,7 @@ onBeforeUnmount(() => {
     width: 20px;
     height: 20px;
   }
+}
+
 }
 </style>

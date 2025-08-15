@@ -185,37 +185,25 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 const cardRow = ref(null)
 
+
 let startX = 0
-let initialScrollLeft = 0
+let scrollLeft = 0
 let isDragging = false
 
 function handleTouchStart(e) {
   isDragging = true
   startX = e.touches[0].pageX
-  initialScrollLeft = cardRow.value.scrollLeft
+  scrollLeft = cardRow.value.scrollLeft
 }
 function handleTouchMove(e) {
   if (!isDragging) return
   const x = e.touches[0].pageX
   const walk = startX - x
-  cardRow.value.scrollLeft = initialScrollLeft + walk
+  cardRow.value.scrollLeft = scrollLeft + walk
 }
+
 function handleTouchEnd() {
   isDragging = false
-}
-
-// Functions for button click
-const scrollAmount = 400 // Adjust as needed for card width
-
-function scrollLeft() {
-  if (cardRow.value) {
-    cardRow.value.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
-  }
-}
-function scrollRight() {
-  if (cardRow.value) {
-    cardRow.value.scrollBy({ left: scrollAmount, behavior: 'smooth' })
-  }
 }
 
 onMounted(() => {
@@ -356,8 +344,8 @@ onBeforeUnmount(() => {
 
 @media (max-width: 1028px) {
   .card-row {
-    overflow-x: auto;      /* Allow horizontal scroll/swipe */
-    justify-content: center;
+    overflow-x: hidden;      /* Hide horizontal scroll */
+    justify-content: center; /* Center the card */
   }
   .card-container {
     width: 280px;
@@ -366,10 +354,6 @@ onBeforeUnmount(() => {
     height: 315px; /* 8:9 aspect ratio: 280 * 9 / 8 = 315 */
     margin: 0 auto;
     flex: 0 0 280px;
-  }
-
-  .card-info-overlay{
-    height: 170px;
   }
   .card-meta{
     padding-top:20px

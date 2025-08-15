@@ -369,7 +369,7 @@ onBeforeUnmount(() => {
   }
 
   .card-info-overlay{
-    height: 170px;
+    height: ;
   }
   .card-meta{
     padding-top:20px

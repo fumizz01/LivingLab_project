@@ -14,6 +14,7 @@
   <div class="popular-activities">
     <h1>กิจกรรมยอดนิยม</h1>
   </div>
+  +
 
   <div class="popular-activities-card">
     <activity-card />

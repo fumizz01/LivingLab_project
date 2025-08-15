@@ -182,57 +182,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref } from 'vue'
 const cardRow = ref(null)
 
-let startX = 0
-let initialScrollLeft = 0
-let isDragging = false
-
-function handleTouchStart(e) {
-  isDragging = true
-  startX = e.touches[0].pageX
-  initialScrollLeft = cardRow.value.scrollLeft
-}
-function handleTouchMove(e) {
-  if (!isDragging) return
-  const x = e.touches[0].pageX
-  const walk = startX - x
-  cardRow.value.scrollLeft = initialScrollLeft + walk
-}
-function handleTouchEnd() {
-  isDragging = false
-}
-
-// Functions for button click
-const scrollAmount = 400 // Adjust as needed for card width
-
 function scrollLeft() {
-  if (cardRow.value) {
-    cardRow.value.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
-  }
+  if (cardRow.value) cardRow.value.scrollBy({ left: -400, behavior: 'smooth' })
 }
 function scrollRight() {
-  if (cardRow.value) {
-    cardRow.value.scrollBy({ left: scrollAmount, behavior: 'smooth' })
-  }
+  if (cardRow.value) cardRow.value.scrollBy({ left: 400, behavior: 'smooth' })
 }
-
-onMounted(() => {
-  if (cardRow.value) {
-    cardRow.value.addEventListener('touchstart', handleTouchStart)
-    cardRow.value.addEventListener('touchmove', handleTouchMove)
-    cardRow.value.addEventListener('touchend', handleTouchEnd)
-  }
-})
-
-onBeforeUnmount(() => {
-  if (cardRow.value) {
-    cardRow.value.removeEventListener('touchstart', handleTouchStart)
-    cardRow.value.removeEventListener('touchmove', handleTouchMove)
-    cardRow.value.removeEventListener('touchend', handleTouchEnd)
-  }
-})
 </script>
 
 <style scoped>
@@ -270,7 +228,7 @@ onBeforeUnmount(() => {
   overflow-x: auto;
   scroll-behavior: smooth;
   padding: 8px 0;
-  width: auto; 
+  width: 1675px; 
   max-width: 100vw;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -355,24 +313,11 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 1028px) {
-  .card-row {
-    overflow-x: auto;      /* Allow horizontal scroll/swipe */
-    justify-content: center;
-  }
   .card-container {
-    width: 280px;
-    max-width: 280px;
+    width: 80vw;
+    max-width: 320px;
     min-width: unset;
-    height: 315px; /* 8:9 aspect ratio: 280 * 9 / 8 = 315 */
-    margin: 0 auto;
-    flex: 0 0 280px;
-  }
-
-  .card-info-overlay{
-    height: 170px;
-  }
-  .card-meta{
-    padding-top:20px
+    height: calc(80vw * 9 / 8); /* Keeps 8:9 aspect ratio */
   }
   .arrow-btn img {
     width: 20px;

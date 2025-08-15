@@ -204,7 +204,7 @@ function handleTouchEnd() {
   isDragging = false
 }
 
-// Functions for button click
+// Add these functions for button click
 const scrollAmount = 400 // Adjust as needed for card width
 
 function scrollLeft() {
@@ -356,8 +356,8 @@ onBeforeUnmount(() => {
 
 @media (max-width: 1028px) {
   .card-row {
-    overflow-x: auto;      /* Allow horizontal scroll/swipe */
-    justify-content: center;
+    overflow-x: hidden;      /* Hide horizontal scroll */
+    justify-content: center; /* Center the card */
   }
   .card-container {
     width: 280px;
@@ -366,10 +366,6 @@ onBeforeUnmount(() => {
     height: 315px; /* 8:9 aspect ratio: 280 * 9 / 8 = 315 */
     margin: 0 auto;
     flex: 0 0 280px;
-  }
-
-  .card-info-overlay{
-    height: 170px;
   }
   .card-meta{
     padding-top:20px
