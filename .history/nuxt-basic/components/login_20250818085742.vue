@@ -102,9 +102,19 @@
           </div>
 
           <div class="register-link">
-              <span>{{ t('login.noAccount') }}</span>
-              <span class="register" @click="goRegister">{{ t('login.register') }}</span>
-          </div>
+    <!-- Dialog -->
+    <v-dialog v-model="loginDialog" fullscreen persistent>
+      <v-card>
+        <v-card-title>{{ t('login.noAccount') }}</v-card-title>
+
+        <v-card-text>
+          <span class="register" @click="handleRegisterClick">
+            {{ t('login.register') }}
+          </span>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+  </div>
         </div>
       </div>
     </v-main>

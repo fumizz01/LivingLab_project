@@ -102,8 +102,10 @@
           </div>
 
           <div class="register-link">
+            <v-dialog v-model="loginDialog" fullscreen persistent>
               <span>{{ t('login.noAccount') }}</span>
-              <span class="register" @click="goRegister">{{ t('login.register') }}</span>
+              <span class="register" @click="handleRegisterClick()">{{ t('login.register') }}</span>
+            </v-dialog>
           </div>
         </div>
       </div>

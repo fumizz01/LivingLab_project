@@ -104,6 +104,7 @@
           <div class="register-link">
               <span>{{ t('login.noAccount') }}</span>
               <span class="register" @click="goRegister">{{ t('login.register') }}</span>
+            
           </div>
         </div>
       </div>

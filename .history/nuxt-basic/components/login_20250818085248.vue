@@ -102,8 +102,8 @@
           </div>
 
           <div class="register-link">
-              <span>{{ t('login.noAccount') }}</span>
-              <span class="register" @click="goRegister">{{ t('login.register') }}</span>
+            <span>{{ t('login.noAccount') }}</span>
+            <span class="register" @click="handleRegisterClick()">{{ t('login.register') }}</span>
           </div>
         </div>
       </div>
@@ -175,7 +175,7 @@ function blockThai(e: KeyboardEvent) { if (/[ก-๙]/.test(e.key)) e.preventDef
 const loginDialog = ref(true)
 function handleRegisterClick() {
   goRegister()
-  loginDialog.value = false  // ปิด popup 
+  loginDialog.value = false  // ปิด popup โดยตรง
 }
 
 
