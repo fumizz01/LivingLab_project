@@ -272,7 +272,6 @@ const confirmPassword = ref("");
 
 const showPassword = ref(false);
 const showConfirm = ref(false);
-const loginDialog = ref(false);
 
 // errors as booleans (reactive with i18n)
 const errors = ref<Record<string, boolean>>({

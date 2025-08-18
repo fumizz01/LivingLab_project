@@ -101,9 +101,28 @@
             </v-btn>
           </div>
 
-          <div class="register-link">
-              <span>{{ t('login.noAccount') }}</span>
-              <span class="register" @click="handleRegisterClick">{{ t('login.register') }}</span>
+           <div class="register-link">
+            <span>{{ t('login.noAccount') }}</span>
+            <!-- ใช้ v-dialog กับ v-model -->
+            <v-dialog v-model="registerDialog" max-width="500">
+              <template #activator="{ props }">
+                <span class="register" v-bind="props">
+                  {{ t('login.register') }}
+                </span>
+              </template>
+
+              <v-card>
+                <v-card-title>{{ t('register.title') }}</v-card-title>
+                <v-card-text>
+                  <!-- ใส่ form สมัคร หรือ component Register ตรงนี้ -->
+                  Register form here...
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn text @click="registerDialog = false">{{ t('common.close') }}</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </div>
         </div>
       </div>
@@ -172,12 +191,10 @@ function blockThai(e: KeyboardEvent) { if (/[ก-๙]/.test(e.key)) e.preventDef
 
 
 // กดปุ่ม register แล้วปิด popup
-const emit = defineEmits<{
-  (e: 'close'): void
-}>()
+const loginDialog = ref(true)
 function handleRegisterClick() {
   goRegister()
-  emit('close') // ปิด popup 
+  loginDialog.value = false  // ปิด popup 
 }
 
 
