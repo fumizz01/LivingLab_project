@@ -1,4 +1,8 @@
 {
+  "index": {
+    "newActivities": "New Activities",
+    "popularActivities": "Popular Activities"
+  },
   "login": {
     "title": "Login",
     "username": "Username",

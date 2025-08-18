@@ -1,4 +1,8 @@
 {
+  "index": {
+    "newActivities": "กิจกรรมมาใหม่",
+    "popularActivities": "กิจกรรมยอดนิยม"
+  },
   "login": {
     "title": "เข้าสู่ระบบ",
     "username": "ชื่อผู้ใช้",

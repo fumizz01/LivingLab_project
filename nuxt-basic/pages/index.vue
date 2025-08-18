@@ -4,7 +4,7 @@
   </div>
 
   <div class="new-activities">
-    <h1>กิจกรรมมาใหม่</h1>
+    <h1>{{ t('index.newActivities') }}</h1>
   </div>
 
   <div class="popular-activities-card">
@@ -12,7 +12,7 @@
   </div>
 
   <div class="popular-activities">
-    <h1>กิจกรรมยอดนิยม</h1>
+    <h1>{{ t('index.popularActivities') }}</h1>
   </div>
 
   <div class="popular-activities-card">
@@ -22,6 +22,8 @@
 
 <script setup>
 import ActivityCard from "../components/ActivityCard.vue";
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({ useScope: 'global' })
 </script>
 
 <style scoped>
