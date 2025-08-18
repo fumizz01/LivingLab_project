@@ -38,8 +38,8 @@
             </v-btn>
           </v-form>
 
-          <div class="back-login" @click="goLogin">
-            {{ t('forgetPassword.backToLogin') }}
+          <div class="register-link">
+            <span class="back-login" @click="goLogin">{{ t('forgetPassword.backToLogin') }}</span>
           </div>
         </div>
       </div>
@@ -124,6 +124,19 @@ function goLogin() {
 }
 .w-100 {
   width: 100%;
+}
+.register-link { 
+  font-size: 14px; 
+  font-weight: 700; 
+  text-align: center; 
+  display: flex; 
+  justify-content: center; 
+  gap: 6px; 
+}
+.back-login { 
+  text-decoration: underline; 
+  cursor: pointer; 
+  color: #222; 
 }
 
 /* ---------- Fields & labels ---------- */
