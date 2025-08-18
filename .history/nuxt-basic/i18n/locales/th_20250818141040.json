@@ -1,0 +1,93 @@
+{
+  "login": {
+    "title": "เข้าสู่ระบบ",
+    "username": "ชื่อผู้ใช้",
+    "usernamePlaceholder": "ชื่อผู้ใช้",
+    "password": "รหัสผ่าน",
+    "passwordPlaceholder": "รหัสผ่าน",
+    "forgotPassword": "ลืมรหัสผ่าน",
+    "loginButton": "เข้าสู่ระบบ",
+    "loginWithOther": "เข้าสู่ระบบด้วยบัญชีอื่น",
+    "loginWithKMUTT": "เข้าสู่ระบบด้วยบัญชี KMUTT",
+    "noAccount": "ยังไม่มีบัญชีผู้ใช้?",
+    "register": "ลงทะเบียน",
+    "showPasswordAlt": "แสดงรหัสผ่าน",
+    "hidePasswordAlt": "ซ่อนรหัสผ่าน",
+    "errors": {
+      "usernameRequired": "กรุณากรอกชื่อผู้ใช้",
+      "passwordRequired": "กรุณากรอกรหัสผ่าน"
+    }
+  },
+
+  "register": {
+    "title": "ลงทะเบียน",
+    "firstName": "ชื่อจริง",
+    "firstNamePlaceholder": "ชื่อจริง",
+    "lastName": "นามสกุล",
+    "lastNamePlaceholder": "นามสกุล",
+    "username": "ชื่อผู้ใช้",
+    "usernamePlaceholder": "ชื่อผู้ใช้",
+    "email": "อีเมล",
+    "emailPlaceholder": "อีเมล",
+    "password": "รหัสผ่าน",
+    "passwordPlaceholder": "รหัสผ่าน",
+    "confirmPassword": "ยืนยันรหัสผ่าน",
+    "confirmPasswordPlaceholder": "ยืนยันรหัสผ่าน",
+    "registerButton": "ลงทะเบียน",
+    "loginWithOther": "เข้าสู่ระบบด้วยบัญชีอื่น",
+    "loginWithKMUTT": "เข้าสู่ระบบด้วยบัญชี KMUTT",
+    "haveAccount": "มีบัญชีอยู่แล้ว?",
+    "gotoLogin": "เข้าสู่ระบบ",
+    "showPasswordAlt": "แสดงรหัสผ่าน",
+    "hidePasswordAlt": "ซ่อนรหัสผ่าน",
+    "errors": {
+      "firstNameRequired": "กรุณากรอกชื่อจริง",
+      "lastNameRequired": "กรุณากรอกนามสกุล",
+      "usernameRequired": "กรุณากรอกชื่อผู้ใช้",
+      "emailRequired": "กรุณากรอกอีเมล",
+      "emailInvalid": "รูปแบบอีเมลไม่ถูกต้อง",
+      "passwordRequired": "กรุณากรอกรหัสผ่าน",
+      "confirmRequired": "กรุณายืนยันรหัสผ่าน",
+      "passwordNotMatch": "รหัสผ่านไม่ตรงกัน"
+    }
+  },
+
+  "forgetPassword": {
+    "title": "ลืมรหัสผ่าน",
+    "email": "อีเมล",
+    "emailPlaceholder": "อีเมล",
+    "resetButton": "รีเซ็ตรหัสผ่าน",
+    "backToLogin": "กลับไปยังหน้าล็อกอิน",
+    "errors": {
+      "emailRequired": "กรุณากรอกอีเมล",
+      "emailInvalid": "รูปแบบอีเมลไม่ถูกต้อง"
+    }
+  },
+  "nav": {
+    "home": "หน้าแรก",
+    "qrScan": "สแกน QR",
+    "explore": "สำรวจ",
+    "login-nav": "ลงชื่อเข้าใช้",
+    "search": "ค้นหากิจกรรม..."
+  },
+
+  "pop-search":{
+    "search": "ค้นหากิจกรรม...",
+    "search-btn": "ค้นหา"
+  },
+
+  "hero": {
+    "title": "เรียนรู้นอกกรอบ เริ่มต้นที่นี่",
+    "subtitle": "กิจกรรมและสถานที่สำหรับการเรียนรู้",
+    "exploreButton": "เริ่มเลย"
+  },
+
+  "qrScan":{
+    "description": "Learning Spots คือจุดเรียนรู้ภายในมหาวิทยาลัย ที่เปิดโอกาสให้นักศึกษาและบุคคลทั่วไปได้เรียนรู้นอกห้องเรียน ผ่านกิจกรรมปฏิบัติจริง การทดลอง เวิร์กช็อป หรือการพูดคุยกับผู้เชี่ยวชาญ เพื่อเสริมสร้างทักษะ ความรู้ และแรงบันดาลใจในชีวิตจริง"
+  },
+
+  "explore":{
+    "search":"ค้นหา",
+    "search-": "ค้นหา"
+  }
+}
