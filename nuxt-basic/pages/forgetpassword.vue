@@ -38,7 +38,7 @@
             </v-btn>
           </v-form>
 
-          <div class="register-link">
+          <div class="login-link">
             <span class="back-login" @click="goLogin">{{ t('forgetPassword.backToLogin') }}</span>
           </div>
         </div>
@@ -125,7 +125,8 @@ function goLogin() {
 .w-100 {
   width: 100%;
 }
-.register-link { 
+.login-link { 
+  margin-top: 24px;
   font-size: 14px; 
   font-weight: 700; 
   text-align: center; 
@@ -134,6 +135,7 @@ function goLogin() {
   gap: 6px; 
 }
 .back-login { 
+  font-size: 14px;
   text-decoration: underline; 
   cursor: pointer; 
   color: #222; 
@@ -203,16 +205,6 @@ function goLogin() {
   background: #222 !important;
   color: #fff !important;
 }
-.back-login {
-  margin-top: 24px;
-  color: #222;
-  font-size: 15px;
-  font-weight: 700;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-}
-
 /* ---------- Responsive ---------- */
 @media (max-width: 600px) {
   .forget-box {
