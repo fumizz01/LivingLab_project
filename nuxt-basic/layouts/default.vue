@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- Menu -->
-    <v-app-bar color="black" dark app>
+    <v-app-bar v-if="!isAuthPage" color="black" dark app>
       <div style="display: flex; align-items: center">
         <v-toolbar-title class="pl-5 pr-2 mr-2 font-weight-bold">
           <NuxtLink class="logo-link" :to="$localePath('index')">
@@ -82,9 +82,9 @@
           <v-list-item :to="$localePath('explore')">{{
             t("nav.explore")
           }}</v-list-item>
-          <v-list-item @click="loginDialog = true">
-            {{ t("nav.login-nav") }}
-          </v-list-item>
+            <NuxtLink :to="$localePath('login')" style="text-decoration:none">
+              <v-btn text color="white" style="width:100%">{{ t("nav.login-nav") }}</v-btn>
+            </NuxtLink>
           <v-list-item>
             <v-btn-toggle
               class="lang-toggle"
@@ -143,9 +143,9 @@
           @keyup.enter="handleSearch"
         />
       </div>
-      <v-btn text class="d-none d-sm-flex" @click="loginDialog = true">{{
-        t("nav.login-nav")
-      }}</v-btn>
+        <NuxtLink :to="$localePath('login')" class="d-none d-sm-flex" style="text-decoration:none">
+          <v-btn text color="white">{{ t("nav.login-nav") }}</v-btn>
+        </NuxtLink>
       <v-btn-toggle
         class="lang-toggle d-none d-sm-flex"
         mandatory
@@ -166,32 +166,35 @@
       </v-btn-toggle>
     </v-app-bar>
 
-    <!-- Login popup -->
-    <v-dialog v-model="loginDialog" fullscreen persistent>
-      <v-card>
-        <login @close="loginDialog = false" />
-      </v-card>
-    </v-dialog>
+    <!-- ...removed login dialog, now using /login page... -->
 
-    <v-main>
+    <LangSwitcher v-if="isAuthPage" />
+    <v-main :class="{ 'auth-bg': isAuthPage }">
       <slot />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 
 const searchDialog = ref(false);
 const searchText = ref("");
-const loginDialog = ref(false);
 const router = useRouter();
 import { useRoute } from "vue-router";
-const lang = ref("TH");
 const { t, locale } = useI18n();
+const lang = ref(locale.value === "en" ? "EN" : "TH");
 const route = useRoute();
+
+import { computed } from "vue";
+
+const authPages = ["/login", "/register", "/forgetpassword", "/resetpassword", "/verifycode"];
+const isAuthPage = computed(() => {
+  const path = route.path.toLowerCase();
+  return authPages.some(p => path === p || path.startsWith(`/en${p}`));
+});
 
 function handleSearch() {
   searchDialog.value = false;
@@ -207,10 +210,17 @@ function switchLang(code: "th" | "en") {
   const full = route.fullPath;
   if (code === "en") {
     if (!full.startsWith("/en")) router.push("/en" + full);
+    lang.value = "EN";
   } else {
     router.push(full.replace(/^\/en(\/|$)/, "/"));
+    lang.value = "TH";
   }
 }
+
+watch(locale, (val) => {
+  lang.value = val === "en" ? "EN" : "TH";
+});
+
 </script>
 
 <style scoped>
@@ -222,8 +232,18 @@ function switchLang(code: "th" | "en") {
   padding: 0;
 }
 
+.auth-bg {
+  background: #0a0a1a;
+  min-height: 100vh;
+}
+
 .v-main {
   padding-top: 64px; /* typical app-bar height */
+}
+.v-main.auth-bg {
+  background: #0a0a1a;
+  min-height: 100vh;
+  padding-top: 0 !important;
 }
 
 .logo-link {
@@ -338,7 +358,7 @@ function switchLang(code: "th" | "en") {
   .d-sm-none {
     display: block !important;
   }
-  .v-list-item--density-default.v-list-item--one-line {
+  .v-list-item--density-default.v-list-item--one-line {  
     min-height: 48px;
     padding-top: 4px;
     padding-bottom: 4px;

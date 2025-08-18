@@ -42,9 +42,9 @@
   "register": {
     "title": "Register",
     "firstName": "First Name",
-    "firstNamePlaceholder": "Please enter your first name",
+    "firstNamePlaceholder": "First Name",
     "lastName": "Last Name",
-    "lastNamePlaceholder": "Please enter your last name",
+    "lastNamePlaceholder": "Last Name",
     "username": "Username",
     "usernamePlaceholder": "Username",
     "email": "Email",
@@ -75,7 +75,7 @@
   "forgetPassword": {
     "title": "Forgot Password",
     "email": "Email",
-    "emailPlaceholder": "Please enter your email",
+    "emailPlaceholder": "Email",
     "resetButton": "Reset Password",
     "backToLogin": "Back to Login",
     "errors": {

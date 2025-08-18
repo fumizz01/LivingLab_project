@@ -2,12 +2,11 @@
   <v-app>
     <v-main>
       <div class="forget-bg">
-        <!-- Language switch -->
-        <div class="lang-switch">
-          <a class="lang-btn" @click.prevent="switchLang('th')">TH</a>
-          <span class="sep">|</span>
-          <a class="lang-btn" @click.prevent="switchLang('en')">EN</a>
-        </div>
+        <v-btn icon class="close-btn" @click="goHome">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+  <!-- Language switcher component -->
+  <LangSwitcher />
 
         <div class="forget-box">
           <h1 class="forget-title">{{ t('forgetPassword.title') }}</h1>
@@ -49,13 +48,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 
-const { t } = useI18n()
+const { t, locale } = useI18n({ useScope: 'global' })
 const router = useRouter()
-const route = useRoute()
+
 
 // Form state
 const email = ref('')
@@ -80,19 +79,19 @@ function onSubmit() {
   }
 }
 
-function goLogin() {
-  router.push('/login')
+function localePath(path: string) {
+  // ถ้า locale เป็น en ให้เติม /en นำหน้า path
+  return locale.value === 'en' ? `/en${path.startsWith('/') ? path : '/' + path}` : path
 }
 
-// Switch language
-function switchLang(code: 'th' | 'en') {
-  const full = route.fullPath
-  if (code === 'en') {
-    if (!full.startsWith('/en')) router.push('/en' + full)
-  } else {
-    router.push(full.replace(/^\/en(\/|$)/, '/'))
-  }
+function goHome() {
+  router.push(localePath('/'))
 }
+
+function goLogin() {
+  router.push(localePath('/login'))
+}
+
 </script>
 
 <style scoped>
@@ -125,31 +124,6 @@ function switchLang(code: 'th' | 'en') {
 }
 .w-100 {
   width: 100%;
-}
-
-/* ---------- Language switch ---------- */
-.lang-switch {
-  position: fixed;
-  top: 32px;
-  right: 48px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #fff;
-}
-.lang-switch a {
-  color: #fff;
-  opacity: 0.7;
-  cursor: pointer;
-  text-decoration: none;
-}
-.lang-switch a.active {
-  opacity: 1;
-  text-decoration: underline;
-}
-.sep {
-  opacity: 0.5;
 }
 
 /* ---------- Fields & labels ---------- */
@@ -247,11 +221,18 @@ function switchLang(code: 'th' | 'en') {
     padding: 0 14px;
   }
   .forget-btn {
-    width: 100%;
     height: 40px;
     font-size: 14px;
     border-radius: 18px;
     margin-top: 12px;
   }
+}
+
+.close-btn {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 20;
+  background: rgb(255, 255, 255);
 }
 </style>
