@@ -4,7 +4,7 @@
   </div>
 
   <div class="new-activities">
-    <h1>{{ $t('title.new-activities') }}</h1>
+    <h1></h1>
   </div>
 
   <div class="popular-activities-card">
@@ -12,7 +12,7 @@
   </div>
 
   <div class="popular-activities">
-    <h1>{{ $t('title.popular-activities') }}</h1>
+    <h1>กิจกรรมยอดนิยม</h1>
   </div>
 
   <div class="popular-activities-card">

@@ -38,10 +38,7 @@
     "exploreButton": "Start"
   },
 
-  "title":{
-    "new-activities": "New Activities",
-    "popular-activities": "Popular Activities"
-  },
+  "title"
 
 
   "register": {
