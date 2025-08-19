@@ -2,12 +2,11 @@
   <v-app>
     <v-main>
       <div class="register-bg">
-        <!-- Language switch -->
-        <div class="lang-switch">
-          <a class="lang-btn" :class="{ active: locale === 'th' }" @click.prevent="switchLang('th')">TH</a>
-          <span class="sep">|</span>
-          <a class="lang-btn" :class="{ active: locale === 'en' }" @click.prevent="switchLang('en')">EN</a>
-        </div>
+        <v-btn icon class="close-btn" @click="goHome">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+  <!-- Language switcher component -->
+  <LangSwitcher />
 
         <div class="register-box">
           <h1 class="register-title">{{ t('register.title') }}</h1>
@@ -183,12 +182,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter,} from 'vue-router'
 import PasswordRules from '../components/PasswordRules.vue';
 
 const { t, locale } = useI18n({ useScope: 'global' })
 const router = useRouter()
-const route  = useRoute()
 
 // form state
 const firstName = ref('')
@@ -261,22 +259,22 @@ function onSubmit() {
   }
 }
 
+function localePath(path: string) {
+  // ถ้า locale เป็น en ให้เติม /en นำหน้า path
+  return locale.value === 'en' ? `/en${path.startsWith('/') ? path : '/' + path}` : path
+}
+
 function goLogin() {
-  router.push('/login')
+  router.push(localePath('/login'))
+}
+
+function goHome() {
+  router.push(localePath('/'))
 }
 
 function registerWithKMUTT() {
   // TODO: SSO flow
-}
-
-// switch language by URL (works with strategy: 'prefix_except_default', defaultLocale: 'th')
-function switchLang(code: 'th' | 'en') {
-  const full = route.fullPath
-  if (code === 'en') {
-    if (!full.startsWith('/en')) router.push('/en' + full)
-  } else {
-    router.push(full.replace(/^\/en(\/|$)/, '/'))
-  }
+  router.push(localePath('/sso')) // ตัวอย่าง SSO path
 }
 
 // block Thai typing (for username; remove on email/password if you want)
@@ -287,24 +285,61 @@ function blockThai(e: KeyboardEvent) {
 
 <style scoped>
 /* ---- Layout (reuse from login) ---- */
-.register-bg{min-height:100vh;background:#0a0a1a;display:flex;align-items:center;justify-content:center;width:100vw}
-.register-box{width:720px;max-width:95vw;border-radius:24px;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,.18);padding:48px 32px 32px;display:flex;flex-direction:column;align-items:center}
-.register-title{font-size:32px;font-weight:700;color:#0c0c20;margin-bottom:28px;text-align:center}
-.w-100{width:100%}
-
-/* ---- Language switch ---- */
-.lang-switch{position:fixed;top:32px;right:48px;z-index:2;display:flex;align-items:center;gap:8px;color:#fff}
-.lang-btn{color:#fff;opacity:.7;cursor:pointer;text-decoration:none}
-.lang-btn.active{text-decoration:underline;opacity:1}
-.sep{opacity:.5}
+.register-bg{
+  min-height:100vh;
+  background:#0a0a1a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100vw
+}
+.register-box{
+  width:720px;
+  max-width:95vw;
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 8px 40px rgba(0,0,0,.18);
+  padding:48px 32px 32px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:100px;
+  margin-bottom:100px
+}
+.register-title{
+  font-size:32px;
+  font-weight:700;
+  color:#0c0c20;
+  margin-bottom:28px;
+  text-align:center
+}
+.w-100{
+  width:100%
+}
 
 /* ---- Fields ---- */
-.field { width: 100%; margin-bottom: 18px; position: relative; }
-.field-label { display: block; font-weight: 700; margin: 6px 0 10px; color: #222; }
-.req { color: #e53935; margin-right: 6px; }
+.field { 
+  width: 100%; 
+  margin-bottom: 18px; 
+  position: relative; 
+}
+.field-label { 
+  display: block; 
+  font-weight: 700; 
+  margin: 6px 0 10px; 
+  color: #222; 
+}
+.req { 
+  color: #e53935; 
+  margin-right: 6px; 
+}
 
 /* full width override */
-.field-full{width:100%;max-width:100%!important;display:block}
+.field-full{
+  width:100%;
+  max-width:100%!important;
+  display:block
+}
 
 /* ---------- Pill style (54px, radius 20px, shadow) ---------- */
 .pill-input :deep(.v-field) {
@@ -315,36 +350,197 @@ function blockThai(e: KeyboardEvent) {
   box-shadow: 0 16px 36px rgba(0,0,0,0.12);
   box-sizing: border-box;
 }
-.pill-input :deep(.v-field.v-field--focused) { box-shadow: 0 22px 48px rgba(0,0,0,0.16); }
-.pill-input :deep(.v-field__input) { height: 54px; align-items: center; padding: 0 18px; }
-.pill-input :deep(input::placeholder) { color: #c7c7c7; }
+.pill-input :deep(.v-field.v-field--focused) { 
+  box-shadow: 0 22px 48px rgba(0,0,0,0.16); 
+}
+.pill-input :deep(.v-field__input) { 
+  height: 54px; 
+  align-items: center; 
+  padding: 0 18px; 
+}
+.pill-input :deep(input::placeholder) { 
+  color: #c7c7c7; 
+}
 
-.eye-icon{width:22px;height:22px;object-fit:contain;cursor:pointer;user-select:none}
+.eye-icon{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+  cursor:pointer;
+  user-select:none
+}
 
 /* ---- Buttons ---- */
-.register-btn{align-self:center;display:block;margin:18px auto 0;width:220px;height:44px;border-radius:22px;
-  font-size:16px;font-weight:700;box-shadow:0 4px 20px rgba(0,0,0,.1);background:#222!important;color:#fff!important}
+.register-btn{
+  align-self:center;
+  display:block;
+  margin:18px auto 0;
+  width:220px;
+  height:44px;
+  border-radius:22px;
+  font-size:16px;
+  font-weight:700;
+  box-shadow:0 4px 20px rgba(0,0,0,.1);
+  background:#222!important;
+  color:#fff!important
+}
 
-.divider-text{text-align:center;font-size:15px;margin-top:26px;margin-bottom:8px;color:#222}
+.divider-text{
+  text-align:center;
+  font-size:15px;
+  margin-top:26px;
+  margin-bottom:8px;
+  color:#222;
+}
 
 /* ---- Social ---- */
-.social-login{width:100%;max-width:350px;margin:0 auto}
-.social-btn{width:100%;min-height:56px;border-radius:9999px;background:#fff!important;color:#222!important;font-weight:700;
-  box-shadow:0 8px 30px rgba(0,0,0,.12);justify-content:flex-start}
-.kmutt-logo{height:22px;width:auto;display:block;object-fit:contain;filter:none;margin-left:2px}
-.social-btn-text{margin-left:8px}
+.social-login{
+  width:100%;
+  max-width:350px;
+  margin:0 auto;
+}
+
+.social-btn{
+  width:100%;
+  min-height:56px;
+  border-radius:9999px;
+  background:#fff!important;
+  color:#222!important;
+  font-weight:700;
+  box-shadow:0 8px 30px rgba(0,0,0,.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kmutt-logo{
+  height:45px;
+  width:auto;
+  display:block;
+  object-fit:contain;
+  filter:none;
+  margin-left:2px
+}
+.social-btn-text{
+  text-align: center;
+  width: 100%
+}
 
 /* ---- Footer ---- */
-.register-link{margin-top:18px;color:#222;font-size:14px;font-weight:700;text-align:center;display:flex;justify-content:center;gap:6px}
-.register{text-decoration:underline;cursor:pointer;color:#222}
+.register-link{
+  margin-top:18px;
+  color:#222;
+  font-size:14px;
+  font-weight:700;
+  text-align:center;
+  display:flex;
+  justify-content:center;
+  gap:6px
+}
+.register{
+  text-decoration:underline;
+  cursor:pointer;
+  color:#222
+}
 
 /* ---- Responsive ---- */
-@media (max-width:600px){
-  .register-box{width:99vw;padding:16px 10px;border-radius:16px}
-  .register-title{font-size:22px;margin-bottom:12px}
-  .pill-input :deep(.v-field){height:50px;min-height:50px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
-  .pill-input :deep(.v-field__input){height:50px;padding:0 14px}
-  .register-btn{width:100%;height:40px;font-size:14px;border-radius:18px;margin-top:12px}
-  .lang-switch{top:12px;right:12px}
+@media (max-width:600px) {
+  .register-box {
+    width: 98vw;
+    max-width: 99vw;
+    padding: 8px 4px;
+    border-radius: 12px;
+    margin-top: 25px;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.10);
+  }
+  .register-title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .field-label {
+    font-size: 13px;
+    margin: 4px 0 6px;
+  }
+  .pill-input :deep(.v-field) {
+    height: 38px;
+    min-height: 38px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  }
+  .pill-input :deep(.v-field__input) {
+    height: 38px;
+    padding: 0 8px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+  }
+  .pill-input :deep(input::placeholder) {
+    font-size: 12px;
+    line-height: 38px;
+    vertical-align: middle;
+    opacity: 1;
+  }
+  .register-btn {
+    height: 32px;
+    font-size: 13px;
+    border-radius: 14px;
+    margin-top: 8px;
+    width: 140px;
+  }
+  .divider-text {
+    font-size: 12px;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+  .social-login {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  .social-btn {
+    /* min-height: 40px; */
+    font-size: 15px;
+    border-radius: 9999px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    padding: 0 24px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .kmutt-logo {
+    height: 24px;
+    margin-left: 0;
+  }
+  .social-btn-text {
+    font-size: 13px;
+  }
+  .register-link {
+    font-size: 12px;
+    margin-top: 8px;
+    gap: 4px;
+  }
+  /* .lang-switch {
+    top: 8px;
+    right: 8px;
+    font-size: 12px;
+    gap: 4px;
+  } */
+  .close-btn {
+    top: 8px;
+    left: 8px;
+    width: 32px;
+    height: 32px;
+  }
+  .eye-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+.close-btn {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 20;
+  background: rgb(255, 255, 255);
 }
 </style>
