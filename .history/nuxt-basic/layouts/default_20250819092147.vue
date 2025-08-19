@@ -82,9 +82,9 @@
           <v-list-item :to="$localePath('explore')">{{
             t("nav.explore")
           }}</v-list-item>
-          <v-list-item :to="$localePath('login')">{{
-            t("nav.login-nav")
-          }}</v-list-item>
+            <NuxtLink :to="$localePath('login')" style="text-decoration:none">
+              <v-btn text color="white" style="width:100%">{{ t("nav.login-nav") }}</v-btn>
+            </NuxtLink>
           <v-list-item>
             <v-btn-toggle
               class="lang-toggle"

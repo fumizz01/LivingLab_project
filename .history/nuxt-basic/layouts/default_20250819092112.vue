@@ -82,9 +82,9 @@
           <v-list-item :to="$localePath('explore')">{{
             t("nav.explore")
           }}</v-list-item>
-          <v-list-item :to="$localePath('login')">{{
-            t("nav.login-nav")
-          }}</v-list-item>
+            <NuxtLink :to="$localePath('login')" style="text-decoration:none">
+              <v-btn class="login-btn" text color="white" style="width:100%">{{ t("nav.login-nav") }}</v-btn>
+            </NuxtLink>
           <v-list-item>
             <v-btn-toggle
               class="lang-toggle"
@@ -144,7 +144,7 @@
         />
       </div>
         <NuxtLink :to="$localePath('login')" class="d-none d-sm-flex" style="text-decoration:none">
-          <v-btn text color="white">{{ t("nav.login-nav") }}</v-btn>
+          <v-btn class="login-btn" text color="white">{{ t("nav.login-nav") }}</v-btn>
         </NuxtLink>
       <v-btn-toggle
         class="lang-toggle d-none d-sm-flex"
@@ -348,6 +348,19 @@ watch(locale, (val) => {
   background: #0077ff !important;
   border-radius: 24px !important  ;
   color: #ffffff !important;
+}
+
+.login-btn {
+  background: #1976d2 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  font-weight: 500;
+  min-width: 120px;
+  transition: background 0.2s;
+}
+.login-btn:hover,
+.login-btn:focus {
+  background: #338af3 !important;
 }
 
 @media (max-width: 1028px) {
