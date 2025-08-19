@@ -360,6 +360,7 @@ function blockThai(e: KeyboardEvent) {
   justify-content:center;
   width:100vw
 }
+/* ---- Layout (reuse from login) ---- */
 .register-box{
   width:720px;
   max-width:95vw;
@@ -371,19 +372,18 @@ function blockThai(e: KeyboardEvent) {
   flex-direction:column;
   align-items:center;
   margin-top:100px;
-  margin-bottom:100px
+  margin-bottom:100px;
 }
 .register-title{
   font-size:32px;
   font-weight:700;
   color:#0c0c20;
   margin-bottom:28px;
-  text-align:center
+  text-align:center;
 }
 .w-100{
-  width:100%
+  width:100%;
 }
-
 /* ---- Fields ---- */
 .field { 
   width: 100%; 
@@ -430,8 +430,24 @@ function blockThai(e: KeyboardEvent) {
   align-items: center; 
   padding: 0 18px; 
 }
+.pill-input :deep(input) {
+  height: 100%;
+  line-height: 54px;
+  padding: 0;
+  box-sizing: border-box;
+}
 .pill-input :deep(input::placeholder) { 
   color: #c7c7c7; 
+  line-height: 54px;
+  height: 100%;
+  vertical-align: middle;
+  opacity: 1;
+}
+.pill-input :deep(.v-field__append-inner) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .eye-icon{
@@ -439,7 +455,10 @@ function blockThai(e: KeyboardEvent) {
   height:22px;
   object-fit:contain;
   cursor:pointer;
-  user-select:none
+  user-select:none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ---- Buttons ---- */
@@ -542,16 +561,39 @@ function blockThai(e: KeyboardEvent) {
   }
   .pill-input :deep(.v-field__input) {
     height: 38px;
-    padding: 0 8px;
+    padding: 0 8px 18px;
     font-size: 13px;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
   }
+
   .pill-input :deep(input::placeholder) {
     font-size: 12px;
     line-height: 38px;
+    height: 100%;
     vertical-align: middle;
     opacity: 1;
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 100px;  browser ไม่รองรับ */
+  }
+  .pill-input :deep(.v-field__append-inner) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .eye-icon {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-top: 0;
+    margin-bottom: 20px; /* ขยับขึ้นบนเล็กน้อย */
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .register-btn {
     height: 32px;
@@ -570,21 +612,31 @@ function blockThai(e: KeyboardEvent) {
     margin: 0 auto;
   }
   .social-btn {
-    /* min-height: 40px; */
     font-size: 15px;
     border-radius: 9999px;
     box-shadow: 0 2px 8px rgba(0,0,0,.08);
-    padding: 0 24px;
+    padding: 0 12px;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
   .kmutt-logo {
-    height: 24px;
+    height: 40px;
     margin-left: 0;
   }
   .social-btn-text {
     font-size: 13px;
+    width: auto;
+    min-width: 0;
+    flex: 1;
+    text-align: center;
+    white-space: normal;
+
   }
   .register-link {
     font-size: 12px;
@@ -602,10 +654,6 @@ function blockThai(e: KeyboardEvent) {
     left: 8px;
     width: 32px;
     height: 32px;
-  }
-  .eye-icon {
-    width: 16px;
-    height: 16px;
   }
 }
 .close-btn {
