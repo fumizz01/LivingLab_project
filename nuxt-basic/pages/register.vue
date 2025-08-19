@@ -9,14 +9,17 @@
   <LangSwitcher />
 
         <div class="register-box">
-          <h1 class="register-title">{{ t('register.title') }}</h1>
+          <h1 class="register-title">{{ t("register.title") }}</h1>
 
           <v-form @submit.prevent="onSubmit" class="w-100">
             <v-row>
               <!-- First Name -->
               <v-col cols="12" md="6">
                 <div class="field">
-                  <label class="field-label"><span class="req">*</span> {{ t('register.firstName') }}</label>
+                  <label class="field-label"
+                    ><span class="req">*</span>
+                    {{ t("register.firstName") }}</label
+                  >
                   <v-text-field
                     v-model="firstName"
                     :placeholder="t('register.firstNamePlaceholder')"
@@ -26,7 +29,11 @@
                     class="pill-input field-full"
                     @blur="() => onBlur('firstName')"
                     :error="touched.firstName && errors.firstName"
-                    :error-messages="touched.firstName && errors.firstName ? t('register.errors.firstNameRequired') : ''"
+                    :error-messages="
+                      touched.firstName && errors.firstName
+                        ? t('register.errors.firstNameRequired')
+                        : ''
+                    "
                   />
                 </div>
               </v-col>
@@ -34,7 +41,10 @@
               <!-- Last Name -->
               <v-col cols="12" md="6">
                 <div class="field">
-                  <label class="field-label"><span class="req">*</span> {{ t('register.lastName') }}</label>
+                  <label class="field-label"
+                    ><span class="req">*</span>
+                    {{ t("register.lastName") }}</label
+                  >
                   <v-text-field
                     v-model="lastName"
                     :placeholder="t('register.lastNamePlaceholder')"
@@ -44,7 +54,11 @@
                     class="pill-input field-full"
                     @blur="() => onBlur('lastName')"
                     :error="touched.lastName && errors.lastName"
-                    :error-messages="touched.lastName && errors.lastName ? t('register.errors.lastNameRequired') : ''"
+                    :error-messages="
+                      touched.lastName && errors.lastName
+                        ? t('register.errors.lastNameRequired')
+                        : ''
+                    "
                   />
                 </div>
               </v-col>
@@ -52,7 +66,9 @@
 
             <!-- Username -->
             <div class="field">
-              <label class="field-label"><span class="req">*</span> {{ t('register.username') }}</label>
+              <label class="field-label"
+                ><span class="req">*</span> {{ t("register.username") }}</label
+              >
               <v-text-field
                 v-model="username"
                 @keypress="blockThai"
@@ -63,13 +79,19 @@
                 class="pill-input field-full"
                 @blur="() => onBlur('username')"
                 :error="touched.username && errors.username"
-                :error-messages="touched.username && errors.username ? t('register.errors.usernameRequired') : ''"
+                :error-messages="
+                  touched.username && errors.username
+                    ? t('register.errors.usernameRequired')
+                    : ''
+                "
               />
             </div>
 
             <!-- Email -->
             <div class="field">
-              <label class="field-label"><span class="req">*</span> {{ t('register.email') }}</label>
+              <label class="field-label"
+                ><span class="req">*</span> {{ t("register.email") }}</label
+              >
               <v-text-field
                 v-model="email"
                 @keypress="blockThai"
@@ -86,7 +108,9 @@
 
             <!-- Password -->
             <div class="field">
-              <label class="field-label"><span class="req">*</span> {{ t('register.password') }}</label>
+              <label class="field-label"
+                ><span class="req">*</span> {{ t("register.password") }}</label
+              >
               <v-text-field
                 v-model="password"
                 @keypress="blockThai"
@@ -98,12 +122,20 @@
                 class="pill-input field-full"
                 @blur="() => onBlur('password')"
                 :error="touched.password && errors.password"
-                :error-messages="touched.password && errors.password ? t('register.errors.passwordRequired') : ''"
+                :error-messages="
+                  touched.password && errors.password
+                    ? t('register.errors.passwordRequired')
+                    : ''
+                "
               >
                 <template #append-inner>
                   <img
                     :src="showPassword ? '/hidden.png' : '/eye.png'"
-                    :alt="showPassword ? t('register.hidePasswordAlt') : t('register.showPasswordAlt')"
+                    :alt="
+                      showPassword
+                        ? t('register.hidePasswordAlt')
+                        : t('register.showPasswordAlt')
+                    "
                     class="eye-icon"
                     role="button"
                     tabindex="0"
@@ -120,7 +152,10 @@
 
             <!-- Confirm Password -->
             <div class="field">
-              <label class="field-label"><span class="req">*</span> {{ t('register.confirmPassword') }}</label>
+              <label class="field-label"
+                ><span class="req">*</span>
+                {{ t("register.confirmPassword") }}</label
+              >
               <v-text-field
                 v-model="confirmPassword"
                 @keypress="blockThai"
@@ -137,7 +172,11 @@
                 <template #append-inner>
                   <img
                     :src="showConfirm ? '/hidden.png' : '/eye.png'"
-                    :alt="showConfirm ? t('register.hidePasswordAlt') : t('register.showPasswordAlt')"
+                    :alt="
+                      showConfirm
+                        ? t('register.hidePasswordAlt')
+                        : t('register.showPasswordAlt')
+                    "
                     class="eye-icon"
                     role="button"
                     tabindex="0"
@@ -147,33 +186,56 @@
                   />
                 </template>
               </v-text-field>
-
             </div>
 
             <!-- Submit -->
-            <v-btn class="register-btn" color="primary" type="submit" rounded="xl">
-              {{ t('register.registerButton') }}
+            <v-btn
+              class="register-btn"
+              color="primary"
+              type="submit"
+              rounded="xl"
+            >
+              {{ t("register.registerButton") }}
             </v-btn>
           </v-form>
 
-          <div class="divider-text">{{ t('register.loginWithOther') }}</div>
+          <div class="divider-text">{{ t("register.loginWithOther") }}</div>
           <v-divider class="my-4" />
 
           <!-- Social: KMUTT -->
           <div class="social-login">
-            <v-btn color="white" class="social-btn" rounded="xl" @click="registerWithKMUTT">
+            <v-btn
+              color="white"
+              class="social-btn"
+              rounded="xl"
+              @click="registerWithKMUTT"
+            >
               <template #prepend>
-                <img src="/KMUTT_CI_Semi_Logo-normal-full-1061x1200.png" alt="KMUTT" class="kmutt-logo" />
+                <img
+                  src="/KMUTT_CI_Semi_Logo-normal-full-1061x1200.png"
+                  alt="KMUTT"
+                  class="kmutt-logo"
+                />
               </template>
-              <span class="social-btn-text">{{ t('register.loginWithKMUTT') }}</span>
+              <span class="social-btn-text">{{
+                t("register.loginWithKMUTT")
+              }}</span>
             </v-btn>
           </div>
 
           <div class="register-link">
-            <span>{{ t('register.haveAccount') }}</span>
-            <span class="register" @click="goLogin">{{ t('register.gotoLogin') }}</span>
+            <span>{{ t("register.haveAccount") }}</span>
+            <span class="register" @click="goLogin">{{
+              t("register.gotoLogin")
+            }}</span>
           </div>
         </div>
+
+        <v-dialog v-model="loginDialog" fullscreen persistent>
+          <v-card>
+            <login @close="loginDialog = false" />
+          </v-card>
+        </v-dialog>
       </div>
     </v-main>
   </v-app>
@@ -189,15 +251,16 @@ const { t, locale } = useI18n({ useScope: 'global' })
 const router = useRouter()
 
 // form state
-const firstName = ref('')
-const lastName = ref('')
-const username = ref('')
-const email = ref('')
-const password = ref('')
-const confirmPassword = ref('')
+const firstName = ref("");
+const lastName = ref("");
+const username = ref("");
+const email = ref("");
+const password = ref("");
+const confirmPassword = ref("");
 
-const showPassword = ref(false)
-const showConfirm = ref(false)
+const showPassword = ref(false);
+const showConfirm = ref(false);
+const loginDialog = ref(false);
 
 // errors as booleans (reactive with i18n)
 const errors = ref<Record<string, boolean>>({
@@ -207,7 +270,7 @@ const errors = ref<Record<string, boolean>>({
   email: false,
   password: false,
   confirmPassword: false,
-})
+});
 
 const touched = ref<Record<string, boolean>>({
   firstName: false,
@@ -216,44 +279,48 @@ const touched = ref<Record<string, boolean>>({
   email: false,
   password: false,
   confirmPassword: false,
-})
+});
 
 function onBlur(field: keyof typeof touched.value) {
-  touched.value[field] = true
-  validate()
+  touched.value[field] = true;
+  validate();
 }
 
 // computed error messages (reactive with locale)
 const emailError = computed(() => {
-  if (!touched.value.email) return ''
-  if (!email.value) return t('register.errors.emailRequired')
+  if (!touched.value.email) return "";
+  if (!email.value) return t("register.errors.emailRequired");
   // basic email pattern
-  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)
-  return ok ? '' : t('register.errors.emailInvalid')
-})
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
+  return ok ? "" : t("register.errors.emailInvalid");
+});
 
 const confirmError = computed(() => {
-  if (!touched.value.confirmPassword) return ''
-  if (!confirmPassword.value) return t('register.errors.confirmRequired')
-  return confirmPassword.value === password.value ? '' : t('register.errors.passwordNotMatch')
-})
+  if (!touched.value.confirmPassword) return "";
+  if (!confirmPassword.value) return t("register.errors.confirmRequired");
+  return confirmPassword.value === password.value
+    ? ""
+    : t("register.errors.passwordNotMatch");
+});
 
 function validate() {
-  errors.value.firstName = !firstName.value
-  errors.value.lastName = !lastName.value
-  errors.value.username = !username.value
-  errors.value.password = !password.value
+  errors.value.firstName = !firstName.value;
+  errors.value.lastName = !lastName.value;
+  errors.value.username = !username.value;
+  errors.value.password = !password.value;
   return (
     !errors.value.username &&
     !errors.value.password &&
     !emailError.value &&
     !confirmError.value
-  )
+  );
 }
 
 function onSubmit() {
   // mark all touched
-  Object.keys(touched.value).forEach(k => (touched.value[k as keyof typeof touched.value] = true))
+  Object.keys(touched.value).forEach(
+    (k) => (touched.value[k as keyof typeof touched.value] = true)
+  );
   if (validate()) {
     // TODO: submit register
   }
@@ -279,7 +346,7 @@ function registerWithKMUTT() {
 
 // block Thai typing (for username; remove on email/password if you want)
 function blockThai(e: KeyboardEvent) {
-  if (/[ก-๙]/.test(e.key)) e.preventDefault()
+  if (/[ก-๙]/.test(e.key)) e.preventDefault();
 }
 </script>
 
@@ -343,11 +410,16 @@ function blockThai(e: KeyboardEvent) {
 
 /* ---------- Pill style (54px, radius 20px, shadow) ---------- */
 .pill-input :deep(.v-field) {
-  width: 100%; max-width: 100%;
-  position: relative; border-radius: 20px; overflow: hidden;
-  height: 54px; min-height: 54px;
-  background: #fff; border: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 16px 36px rgba(0,0,0,0.12);
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 54px;
+  min-height: 54px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
 }
 .pill-input :deep(.v-field.v-field--focused) { 

@@ -8,7 +8,7 @@
   </div>
 
   <div class="popular-activities-card">
-    <activity-card />
+    <SlideActivityCard />
   </div>
 
   <div class="popular-activities">
@@ -16,7 +16,7 @@
   </div>
 
   <div class="popular-activities-card">
-    <activity-card />
+    <SlideActivityCard />
   </div>
 </template>
 

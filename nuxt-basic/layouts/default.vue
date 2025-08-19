@@ -179,11 +179,12 @@
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
 
 const searchDialog = ref(false);
 const searchText = ref("");
 const router = useRouter();
-import { useRoute } from "vue-router";
+
 const { t, locale } = useI18n();
 const lang = ref(locale.value === "en" ? "EN" : "TH");
 const route = useRoute();

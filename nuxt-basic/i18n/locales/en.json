@@ -42,6 +42,11 @@
     "exploreButton": "Start"
   },
 
+  "title":{
+    "new-activities": "New Activities",
+    "popular-activities": "Popular Activities"
+  },
+
 
   "register": {
     "title": "Register",
@@ -86,5 +91,18 @@
       "emailRequired": "Please enter your email",
       "emailInvalid": "Invalid email format"
     }
+  },
+
+  "qrScan":{
+    "description": "Learning Spots are learning points within the university that provide opportunities for students and the general public to learn outside the classroom through hands-on activities, experiments, workshops, or discussions with experts to enhance skills, knowledge, and real-life inspiration."
+  },
+
+  "explore":{
+    "search":"Search",
+    "search-activity": "Search Activity"
+  },
+
+  "activityIntro":{
+    "btn": "Enroll"
   }
 }
