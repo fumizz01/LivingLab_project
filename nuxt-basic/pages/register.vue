@@ -316,13 +316,25 @@ function validate() {
   );
 }
 
-function onSubmit() {
+async function onSubmit() {
   // mark all touched
   Object.keys(touched.value).forEach(
     (k) => (touched.value[k as keyof typeof touched.value] = true)
   );
   if (validate()) {
-    // TODO: submit register
+    // ส่งข้อมูลไป backend
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ /* ข้อมูลฟอร์ม */ })
+    });
+    const data = await res.json();
+    if (data.success) {
+      // สมัครสำเร็จ ไปหน้า login Azure ทันที
+      window.location.href = '/api/auth/azure';
+    } else {
+      // แสดง error
+    }
   }
 }
 

@@ -150,7 +150,33 @@ function goRegister() {
 function goForgotPassword() {
   router.push(localePath('/forgetpassword'))
 }
-function loginWithKMUTT() { /* ... */ }
+async function loginWithKMUTT() {
+  // ตรวจสอบ username ก่อน
+  if (!username.value) {
+    touched.value.username = true;
+    errors.value.username = true;
+    return;
+  }
+  try {
+    // เรียก backend เพื่อตรวจสอบ email สำรอง
+    const res = await fetch('/api/check-personal-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: username.value })
+    });
+    const data = await res.json();
+    if (data.hasPersonalEmail) {
+      // ไปหน้า SSO Microsoft/Azure
+      window.location.href = '/api/auth/azure'; // หรือ path SSO ที่ backend กำหนด
+    } else {
+      // ไปหน้า register เพื่อเพิ่ม email สำรอง
+      router.push(localePath('/register'));
+    }
+  } catch (e) {
+    // error handling
+    alert('เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่');
+  }
+}
 
 function blockThai(e: KeyboardEvent) { if (/[ก-๙]/.test(e.key)) e.preventDefault() }
 </script>
